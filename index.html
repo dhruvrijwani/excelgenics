@@ -20,6 +20,7 @@
             color: #1a1a1a;
             background: #f5f5f5;
             padding: 0;
+            overflow-x: hidden;
         }
 
         .container {
@@ -453,6 +454,12 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+
+            .table-responsive {
+                overflow-x: auto;
+            }
+
+
             .header {
                 padding: 50px 30px;
             }
@@ -682,6 +689,7 @@
                     <span>Projected February Numbers</span>
                 </div>
 
+                <div class="table-responsive">
                 <table style="margin: 30px 0;">
                     <thead>
                         <tr>
@@ -700,6 +708,7 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
 
                 <div class="info-box">
                     <p>
@@ -736,7 +745,7 @@
                 </div>
                 <div>
                     Report prepared by<br>
-                    <strong>Black Coffee Media</strong>
+                    <strong>Sandeep Sahoo</strong>
                 </div>
                 <div>
                     Confidential & Proprietary<br>
