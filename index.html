@@ -1,0 +1,750 @@
+"<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excelgenics - January 2026 Performance Report</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sora', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #f5f5f5;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #ffffff;
+        }
+
+        /* Header */
+        .header {
+            background: #1a1a1a;
+            color: #f5f5f5;
+            padding: 80px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #404040, transparent);
+        }
+
+        .brand-name {
+            font-size: 3em;
+            font-weight: 800;
+            letter-spacing: 8px;
+            margin-bottom: 30px;
+            color: #ffffff;
+        }
+
+        .report-title {
+            font-size: 1.8em;
+            font-weight: 300;
+            margin-bottom: 15px;
+            color: #e8e8e8;
+        }
+
+        .report-meta {
+            font-size: 0.9em;
+            color: #a0a0a0;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .report-meta span {
+            display: inline-block;
+            margin-right: 30px;
+        }
+
+        /* Content */
+        .content {
+            padding: 60px;
+        }
+
+        /* Section Headers */
+        h2 {
+            font-size: 2em;
+            margin: 80px 0 40px 0;
+            color: #1a1a1a;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: #1a1a1a;
+        }
+
+        h3 {
+            font-size: 1.3em;
+            margin: 40px 0 20px 0;
+            color: #2a2a2a;
+            font-weight: 600;
+        }
+
+        /* Executive Summary */
+        .executive-summary {
+            background: #f9f9f9;
+            padding: 50px;
+            margin: 60px 0;
+            border-left: 3px solid #1a1a1a;
+            position: relative;
+        }
+
+        .executive-summary h2 {
+            margin-top: 0;
+        }
+
+        .executive-summary p {
+            font-size: 1.05em;
+            line-height: 1.8;
+            color: #2a2a2a;
+            font-weight: 400;
+        }
+
+        .executive-summary strong {
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        /* Metric Grid */
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .metric-card {
+            background: #ffffff;
+            padding: 40px 35px;
+            border: 1px solid #e0e0e0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            border-color: #1a1a1a;
+            transform: translateY(-2px);
+        }
+
+        .metric-card.warning {
+            background: #fafafa;
+        }
+
+        .metric-label {
+            font-size: 0.75em;
+            color: #6a6a6a;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .metric-value {
+            font-size: 2.8em;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            font-size: 0.7em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid #1a1a1a;
+            color: #1a1a1a;
+        }
+
+        .status-badge.critical {
+            background: #1a1a1a;
+            color: #ffffff;
+        }
+
+        .status-badge.warning {
+            background: transparent;
+            border-color: #6a6a6a;
+            color: #6a6a6a;
+        }
+
+        /* Highlight Boxes */
+        .highlight-box {
+            background: #f9f9f9;
+            border-left: 3px solid #1a1a1a;
+            padding: 40px 45px;
+            margin: 50px 0;
+        }
+
+        .highlight-box.warning {
+            border-left-color: #4a4a4a;
+            background: #fafafa;
+        }
+
+        .highlight-box.success {
+            border-left-color: #2a2a2a;
+        }
+
+        .highlight-title {
+            font-weight: 700;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .icon-text {
+            font-size: 1.2em;
+            font-weight: 800;
+        }
+
+        ul {
+            margin: 25px 0;
+            padding-left: 25px;
+        }
+
+        li {
+            margin: 15px 0;
+            line-height: 1.8;
+            color: #2a2a2a;
+            font-weight: 400;
+        }
+
+        li strong {
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 40px 0;
+            border: 1px solid #e0e0e0;
+        }
+
+        thead {
+            background: #1a1a1a;
+            color: #ffffff;
+        }
+
+        th {
+            padding: 20px;
+            text-align: left;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75em;
+            letter-spacing: 2px;
+        }
+
+        td {
+            padding: 20px;
+            border-bottom: 1px solid #e8e8e8;
+            color: #2a2a2a;
+            font-weight: 400;
+        }
+
+        tbody tr:hover {
+            background: #fafafa;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Product Performance */
+        .product-bar {
+            margin-bottom: 30px;
+        }
+
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .product-value {
+            font-weight: 800;
+            font-size: 1.1em;
+        }
+
+        .bar-container {
+            width: 100%;
+            height: 8px;
+            background: #e8e8e8;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: #1a1a1a;
+            transition: width 0.5s ease;
+        }
+
+        /* CTA Button */
+        .cta-section {
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 60px 50px;
+            text-align: center;
+            margin: 80px 0;
+        }
+
+        .cta-title {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-description {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 35px;
+            color: #e8e8e8;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ffffff;
+            color: #1a1a1a;
+            padding: 18px 45px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            border: 2px solid #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: #ffffff;
+        }
+
+        .cta-meta {
+            font-size: 0.9em;
+            margin-top: 25px;
+            color: #a0a0a0;
+            font-weight: 400;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2a2a2a;
+            color: #e8e8e8;
+            padding: 50px 60px;
+            border-top: 1px solid #404040;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            font-size: 0.85em;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .footer-content strong {
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        /* Projection Cards */
+        .projection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .projection-card {
+            background: #fafafa;
+            padding: 30px 25px;
+            border: 1px solid #e0e0e0;
+            text-align: center;
+        }
+
+        .projection-label {
+            font-size: 0.7em;
+            color: #6a6a6a;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+        }
+
+        .projection-value {
+            font-size: 2em;
+            font-weight: 800;
+            color: #1a1a1a;
+        }
+
+        .projection-meta {
+            font-size: 0.85em;
+            color: #6a6a6a;
+            margin-top: 8px;
+            font-weight: 400;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: #f9f9f9;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 3px solid #1a1a1a;
+        }
+
+        .info-box p {
+            font-size: 1em;
+            line-height: 1.8;
+            color: #2a2a2a;
+            margin: 0;
+        }
+
+        .info-box strong {
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        /* SVG Icons */
+        .svg-icon {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 50px 30px;
+            }
+
+            .brand-name {
+                font-size: 2em;
+                letter-spacing: 4px;
+            }
+
+            .report-title {
+                font-size: 1.4em;
+            }
+
+            .content {
+                padding: 30px 25px;
+            }
+
+            .metric-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            .executive-summary {
+                padding: 30px 25px;
+            }
+        }
+
+        /* Subtle animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .metric-card {
+            animation: fadeIn 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="brand-name">EXCELGENICS</div>
+            <div class="report-title">January 2026 Performance Report</div>
+            <div class="report-meta">
+                <span>Report Period: January 1-31, 2026</span>
+                <span>Brand: E-commerce Nutraceuticals</span>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="executive-summary">
+                <h2>Executive Summary</h2>
+                <p>
+                    In January, we couldn't spend as much as we wanted due to <strong>card issues leading to fund addition problems</strong>, for which the <strong>Meta ad account got disabled post 21st January 2026</strong>. However, the <strong>Google Search campaign continued running</strong> with a very small daily budget of around <strong>₹500</strong>. We ended the month with approximately <strong>₹23k revenue and a ROAS of 0.68</strong>. This operational disruption significantly impacted our ability to execute planned marketing strategies and limited our growth potential for the month.
+                </p>
+            </div>
+
+            <div class="metric-grid">
+                <div class="metric-card warning">
+                    <div class="metric-label">Total Revenue</div>
+                    <div class="metric-value">₹22,994</div>
+                </div>
+
+                <div class="metric-card warning">
+                    <div class="metric-label">Total Ad Spend</div>
+                    <div class="metric-value">₹33,592</div>
+                    <span class="status-badge critical">Below Spend</span>
+                </div>
+
+                <div class="metric-card warning">
+                    <div class="metric-label">Overall ROAS</div>
+                    <div class="metric-value">0.68x</div>
+                    <span class="status-badge critical">Need More Optimisations</span>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Total Orders</div>
+                    <div class="metric-value">9</div>
+                    <span class="status-badge warning">Scale Needed</span>
+                </div>
+            </div>
+
+            <h2>Platform Performance Analysis</h2>
+
+            <div class="highlight-box">
+                <div class="highlight-title">
+                    <span class="icon-text">M</span>
+                    <span>Meta (Facebook & Instagram)</span>
+                </div>
+                <ul>
+                    <li>Initially we saw a good performance coming in and we were aiming to get to a position where we get to receiving <strong>an order a day</strong></li>
+                    <li>We tested <strong>4 audiences simultaneously</strong> while we started receiving orders from them, still we couldn't end up considering those audiences as winners as that was <strong>too early to judge</strong> and also we didn't hit our benchmarks with those</li>
+                    <li>Many of the <strong>optimisations outside ads</strong> were also recommended to improve the conversion rate</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box warning">
+                <div class="highlight-title">
+                    <span class="icon-text">G</span>
+                    <span>Google Search Campaigns</span>
+                </div>
+                <ul>
+                    <li>Here we're running only the <strong>search campaign with a daily budget of ₹500 only</strong>. As the daily budget was low initially, and we hadn't got a green signal to start spending 20k by 8th of February at that time. So we only focused on <strong>one product to promote through search ads i.e. Omegaco</strong></li>
+                    <li>Here we <strong>didn't get any qualified traction along with no conversion rate</strong></li>
+                    <li>Though our ads started <strong>ranking good</strong>, but we <strong>lacked trustability factor as a new brand</strong> in the market, and people searching for the product usually are <strong>high intent customers</strong> who are looking for very specific products and that too choose specific <strong>known brands</strong> especially in case of products related to health care</li>
+                </ul>
+            </div>
+
+            <h2>Product Sales Performance</h2>
+
+            <div class="highlight-box">
+                <div class="highlight-title">
+                    <span class="icon-text">📦</span>
+                    <span>Total Sales by Product</span>
+                </div>
+                
+                <div style="margin-top: 40px;">
+                    <div class="product-bar">
+                        <div class="product-header">
+                            <span>MAGNEVA · EXCELGENICS · Skin health</span>
+                            <span class="product-value">₹5.7K</span>
+                        </div>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 96%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="product-bar">
+                        <div class="product-header">
+                            <span>RADIA · EXCELGENICS · Skin health</span>
+                            <span class="product-value">₹5.9K</span>
+                        </div>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 100%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="product-bar">
+                        <div class="product-header">
+                            <span>PUREBERB · EXCELGENICS · Skin health</span>
+                            <span class="product-value">₹4.5K</span>
+                        </div>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 76%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="product-bar">
+                        <div class="product-header">
+                            <span>CoQHEALTH · EXCELGENICS · Skin health</span>
+                            <span class="product-value">₹4.4K</span>
+                        </div>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 75%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="product-bar">
+                        <div class="product-header">
+                            <span>OMEGACO · EXCELGENICS · Skin health</span>
+                            <span class="product-value">₹2.3K</span>
+                        </div>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 39%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <p>
+                        <strong>Key Insight:</strong> RADIA (₹5.9K) and MAGNEVA (₹5.7K) emerged as top performers, accounting for approximately <strong>50%</strong> of total product revenue. OMEGACO showed lower sales at ₹2.3K, indicating potential for optimization or increased promotional focus.
+                    </p>
+                    <p style="margin-top: 15px;">
+                        However, when looking at <strong>unit sales</strong>, MAGNEVA led with <strong>6 items sold</strong>, followed by OMEGACO with <strong>4 items sold</strong>. This indicates that while MAGNEVA has strong unit velocity, RADIA achieves higher revenue per unit sold, suggesting a premium pricing advantage or better margin potential.
+                    </p>
+                </div>
+            </div>
+
+            <h2>Notes & February Actions</h2>
+
+            <div class="highlight-box success">
+                <div class="highlight-title">
+                    <span class="icon-text">📝</span>
+                    <span>Important Updates</span>
+                </div>
+                <ul>
+                    <li><strong>Meta ads resumed from 3rd February</strong> and we also <strong>scaled the Google ads in February</strong> to hit the <strong>₹20k spend before 8th February</strong> to avail the <strong>₹20k credit for Google Ads</strong></li>
+                    <li>The spends on Google to hit ₹20k is <strong>purely based for gaining some account learnings</strong> in the meanwhile, but <strong>agreed to not include the spends on performance numbers</strong></li>
+                    <li>Though we're still aiming to get a few orders from the Google ads as well, but due to <strong>limited time and huge push on spends</strong> will take some more time to get the right learnings and to get in front of the right audience</li>
+                </ul>
+            </div>
+
+            <h2>Optimization Recommendations</h2>
+
+            <div class="cta-section">
+                <div class="cta-title">Comprehensive Improvement Action Plan</div>
+                <div class="cta-description">
+                    We've compiled a detailed list of <strong>8+ strategic recommendations</strong> covering creative optimization, website improvements, conversion rate enhancements, and trust-building initiatives to boost performance in February and beyond.
+                </div>
+                <a href="https://docs.google.com/document/d/1POGwmijc9500hYTDtPDAcvj8p3kgYy3Ip3ID7arUF2w/edit?tab=t.0" target="_blank" class="cta-button">
+                    View Full Improvement Plan
+                </a>
+                <div class="cta-meta">
+                    <strong>Key Focus Areas:</strong> Video Creatives • UGC Content • CTR Optimization • COD Payment • Website Speed • Trust Signals
+                </div>
+            </div>
+
+            <h2>February 2026 Projections</h2>
+
+            <div class="highlight-box">
+                <div class="highlight-title">
+                    <span class="icon-text">🎯</span>
+                    <span>Projected February Numbers</span>
+                </div>
+
+                <table style="margin: 30px 0;">
+                    <thead>
+                        <tr>
+                            <th>Spends</th>
+                            <th>Orders</th>
+                            <th>Revenue</th>
+                            <th>ROAS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight: 700; font-size: 1.2em;">₹1,70,000</td>
+                            <td style="font-weight: 700; font-size: 1.2em;">71</td>
+                            <td style="font-weight: 700; font-size: 1.2em;">₹1,05,840</td>
+                            <td style="font-weight: 700; font-size: 1.2em;">0.62</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="info-box">
+                    <p>
+                        <strong>⚠️ Important Note:</strong> Though our <strong>major priority will be to achieve the revenue target for the month of at least ₹1 lakh</strong>, but this projection is purely based on the <strong>implementations of the suggestions presented</strong> and <strong>aggressive creative testings with different marketing angles</strong>.
+                    </p>
+                </div>
+
+                <div class="projection-grid">
+                    <div class="projection-card">
+                        <div class="projection-label">Growth vs January</div>
+                        <div class="projection-value">+689%</div>
+                        <div class="projection-meta">Orders increase</div>
+                    </div>
+                    <div class="projection-card">
+                        <div class="projection-label">Revenue Growth</div>
+                        <div class="projection-value">+360%</div>
+                        <div class="projection-meta">₹23K → ₹105K</div>
+                    </div>
+                    <div class="projection-card">
+                        <div class="projection-label">Target AOV</div>
+                        <div class="projection-value">₹1,491</div>
+                        <div class="projection-meta">Per order value</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            <div class="footer-content">
+                <div>
+                    <strong>EXCELGENICS</strong><br>
+                    January 2026 Performance Marketing Report
+                </div>
+                <div>
+                    Report prepared by<br>
+                    <strong>Black Coffee Media</strong>
+                </div>
+                <div>
+                    Confidential & Proprietary<br>
+                    © 2026 Excelgenics
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+"
