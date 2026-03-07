@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Excelgenics – February 2026 Performance Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0f1a;
+    --surface: #111827;
+    --surface2: #1a2235;
+    --border: rgba(255,255,255,0.07);
+    --accent: #3fd6a8;
+    --accent2: #f0b429;
+    --accent3: #6c8ef5;
+    --text: #e8edf5;
+    --muted: #7a8ba0;
+    --danger: #f87171;
+    --success: #3fd6a8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding: 80px 60px 60px;
+    border-bottom: 1px solid var(--border);
+    background: radial-gradient(ellipse 80% 60% at 60% -10%, rgba(63,214,168,0.12) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 10% 80%, rgba(108,142,245,0.08) 0%, transparent 60%);
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      90deg, transparent, transparent 60px,
+      rgba(255,255,255,0.015) 60px, rgba(255,255,255,0.015) 61px
+    ),
+    repeating-linear-gradient(
+      0deg, transparent, transparent 60px,
+      rgba(255,255,255,0.015) 60px, rgba(255,255,255,0.015) 61px
+    );
+    pointer-events: none;
+  }
+  .hero-label {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(63,214,168,0.3);
+    padding: 4px 12px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 6vw, 68px);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-sub {
+    color: var(--muted);
+    font-size: 14px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+  .hero-badge {
+    display: flex; gap: 24px; margin-top: 40px; flex-wrap: wrap;
+  }
+  .hero-badge .b {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+  }
+  .hero-badge .b strong { color: var(--text); display: block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2px; }
+
+  /* ── SECTION ── */
+  .section { padding: 60px; border-bottom: 1px solid var(--border); }
+  .section:last-child { border-bottom: none; }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .section-desc { color: var(--muted); max-width: 620px; font-size: 14px; margin-bottom: 40px; }
+
+  /* ── KPI CARDS ── */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+  .kpi-card {
+    background: var(--surface);
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .kpi-card:hover::after { opacity: 1; }
+  .kpi-card .kpi-icon {
+    font-size: 20px; margin-bottom: 12px; display: block;
+  }
+  .kpi-card .kpi-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 4px;
+    color: var(--text);
+  }
+  .kpi-card .kpi-label {
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-family: 'DM Mono', monospace;
+  }
+  .kpi-card .kpi-note {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--accent);
+  }
+  .kpi-card.accent { background: linear-gradient(135deg, rgba(63,214,168,0.08), rgba(63,214,168,0.02)); }
+  .kpi-card.accent .kpi-val { color: var(--accent); }
+  .kpi-card.gold .kpi-val { color: var(--accent2); }
+  .kpi-card.blue .kpi-val { color: var(--accent3); }
+
+  /* ── PLATFORM CARD ── */
+  .platform-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 32px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .platform-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--accent);
+    border-radius: 0 2px 2px 0;
+  }
+  .platform-card.meta::before { background: var(--accent3); }
+  .platform-card.google::before { background: var(--accent2); }
+  .platform-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
+  }
+  .platform-icon {
+    width: 40px; height: 40px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: 'DM Mono', monospace;
+  }
+  .meta .platform-icon { background: rgba(108,142,245,0.15); color: var(--accent3); }
+  .google .platform-icon { background: rgba(240,180,41,0.15); color: var(--accent2); }
+  .platform-name { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; }
+  .platform-sub { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; letter-spacing: 0.05em; }
+  .badge-primary {
+    margin-left: auto;
+    background: rgba(63,214,168,0.1);
+    color: var(--accent);
+    border: 1px solid rgba(63,214,168,0.2);
+    font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase; font-family: 'DM Mono', monospace;
+    padding: 4px 10px; border-radius: 2px;
+  }
+  .platform-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
+  }
+  .pstat { }
+  .pstat .val {
+    font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; line-height: 1;
+  }
+  .pstat .lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; font-family: 'DM Mono', monospace; margin-top: 4px; }
+
+  /* ── TABLE ── */
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-top: 24px;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  thead tr { background: var(--surface2); }
+  th {
+    text-align: left; padding: 14px 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--muted);
+    font-weight: 500;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  .tag-good { color: var(--success); font-family: 'DM Mono', monospace; font-size: 12px; }
+  .tag-warn { color: var(--accent2); font-family: 'DM Mono', monospace; font-size: 12px; }
+  .tag-bad { color: var(--danger); font-family: 'DM Mono', monospace; font-size: 12px; }
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight-box {
+    background: linear-gradient(135deg, rgba(63,214,168,0.06), rgba(63,214,168,0.02));
+    border: 1px solid rgba(63,214,168,0.2);
+    border-radius: 6px;
+    padding: 24px 28px;
+    margin-top: 24px;
+  }
+  .highlight-box.warning {
+    background: linear-gradient(135deg, rgba(240,180,41,0.06), rgba(240,180,41,0.02));
+    border-color: rgba(240,180,41,0.2);
+  }
+  .highlight-box.danger {
+    background: linear-gradient(135deg, rgba(248,113,113,0.06), rgba(248,113,113,0.02));
+    border-color: rgba(248,113,113,0.2);
+  }
+  .hb-title { font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+
+  /* ── INSIGHT GRID ── */
+  .insight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .insight-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 24px;
+  }
+  .insight-card .ic-icon { font-size: 22px; margin-bottom: 12px; }
+  .insight-card .ic-title { font-weight: 600; margin-bottom: 8px; font-size: 15px; }
+  .insight-card .ic-body { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* ── ROAS VISUAL ── */
+  .roas-meter {
+    background: var(--surface2);
+    border-radius: 4px;
+    height: 8px;
+    overflow: hidden;
+    margin-top: 8px;
+    margin-bottom: 4px;
+  }
+  .roas-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent3), var(--accent));
+    border-radius: 4px;
+    width: 40.7%; /* 1.22/3 * 100 = 40.7% assuming 3x as 100% */
+  }
+
+  /* ── NEXT STEPS ── */
+  .steps-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
+  .steps-list li {
+    display: flex; align-items: flex-start; gap: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 18px 20px;
+  }
+  .step-num {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    width: 28px; height: 28px; min-width: 28px;
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Mono', monospace; font-size: 12px;
+    color: var(--accent);
+  }
+  .step-body strong { display: block; font-weight: 600; margin-bottom: 4px; }
+  .step-body span { font-size: 13px; color: var(--muted); }
+
+  /* ── FOOTER ── */
+  .footer {
+    padding: 40px 60px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
+  }
+  .footer-brand {
+    font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700;
+  }
+  .footer-brand span { color: var(--accent); }
+  .footer-meta { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+
+  /* ── DIVIDER ── */
+  .divider { height: 1px; background: var(--border); margin: 32px 0; }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: white; color: #111; }
+  }
+  @media (max-width: 640px) {
+    .hero, .section, .footer { padding: 36px 24px; }
+    .hero h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════ HERO ══════════════ -->
+<header class="hero">
+  <div class="hero-label">Performance Marketing Report</div>
+  <h1>EXCELGENICS<br><span>February 2026</span></h1>
+  <p class="hero-sub">Nutraceuticals · E-Commerce · India</p>
+  <div class="hero-badge">
+    <div class="b"><strong>Report Period</strong>February 1–28, 2026</div>
+    <div class="b"><strong>Brand</strong>Excelgenics – Nutraceuticals</div>
+    <div class="b"><strong>Prepared By</strong>Performance Marketing Team</div>
+    <div class="b"><strong>Next Review</strong>March 2026</div>
+  </div>
+</header>
+
+<!-- ══════════════ EXECUTIVE SUMMARY ══════════════ -->
+<section class="section">
+  <div class="section-label">01 · Overview</div>
+  <div class="section-title">Executive Summary</div>
+  <p class="section-desc">February 2026 marks Excelgenics' first tracked performance month. Campaigns generated ₹1.27L in gross revenue from ₹1.04L in ad spend, delivering a 1.22x ROAS across 76 orders.</p>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <span class="kpi-icon">💸</span>
+      <div class="kpi-val">₹1,04,951</div>
+      <div class="kpi-label">Total Ad Spend</div>
+      <div class="kpi-note">February 2026</div>
+    </div>
+    <div class="kpi-card blue">
+      <span class="kpi-icon">📦</span>
+      <div class="kpi-val">76</div>
+      <div class="kpi-label">Total Orders</div>
+      <div class="kpi-note">All platforms</div>
+    </div>
+    <div class="kpi-card accent">
+      <span class="kpi-icon">📈</span>
+      <div class="kpi-val">₹1,27,752</div>
+      <div class="kpi-label">Gross Revenue</div>
+      <div class="kpi-note">Before returns</div>
+    </div>
+    <div class="kpi-card gold">
+      <span class="kpi-icon">⚡</span>
+      <div class="kpi-val">1.22x</div>
+      <div class="kpi-label">ROAS</div>
+      <div class="kpi-note">Baseline established</div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <div class="hb-title">🟢 February Baseline Established</div>
+    <p style="font-size:14px;color:var(--muted);line-height:1.7">February is Excelgenics' foundational performance month. With a 1.22x ROAS, campaigns are in the learning phase — spend is being deployed, audiences are being tested, and conversion pathways are being refined. The priority for March is to push ROAS toward 1.8x–2.0x by improving creative performance, audience segmentation, and AOV.</p>
+  </div>
+
+  <div class="insight-grid" style="margin-top:24px">
+    <div class="insight-card">
+      <div class="ic-icon">🧬</div>
+      <div class="ic-title">Category: Nutraceuticals</div>
+      <div class="ic-body">Nutraceutical brands typically require a longer consideration window. Trust-building creatives and educational content are critical for conversion rate improvement.</div>
+    </div>
+    <div class="insight-card">
+      <div class="ic-icon">🎯</div>
+      <div class="ic-title">Avg. Order Value Focus</div>
+      <div class="ic-body">Current AOV is ~₹1,681. Subscription offers, bundles, and combo packs can be powerful levers to lift AOV and ROAS simultaneously.</div>
+    </div>
+    <div class="insight-card">
+      <div class="ic-icon">📍</div>
+      <div class="ic-title">Learning Phase Active</div>
+      <div class="ic-body">Ad algorithms are in active learning. Frequent budget changes should be avoided — allow campaigns to exit the learning phase before major optimization decisions.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ RTO NOTE ══════════════ -->
+<section class="section" style="padding-top:0;border-bottom:none">
+  <div class="highlight-box danger">
+    <div class="hb-title">🚚 RTO Impact — Net Revenue Adjustment</div>
+    <p style="font-size:14px;color:var(--muted);line-height:1.8">Additionally, in February we recorded RTOs of approximately <strong style="color:var(--danger)">₹36,000</strong>. After adjusting the total revenue by excluding these RTOs, the net revenue as of data received till 5th March stands at <strong style="color:var(--text)">₹91,300</strong>, resulting in an ROI of <strong style="color:var(--danger)">0.87x</strong>.</p>
+  </div>
+</section>
+
+<!-- ══════════════ PERFORMANCE NOTES ══════════════ -->
+<section class="section">
+  <div class="section-label">02 · Performance Notes</div>
+  <div class="section-title">February Overview</div>
+  <div class="highlight-box">
+    <p style="font-size:15px;color:var(--text);line-height:1.8">In February, we utilized the full budget capacity and tested multiple audiences and creatives to identify the best-performing combinations. With a target of achieving a minimum gross revenue of <strong style="color:var(--accent)">₹1 lakh</strong>, we successfully generated <strong style="color:var(--accent)">₹1.27 lakh</strong> in gross revenue during the month.</p>
+  </div>
+</section>
+
+<!-- ══════════════ META ANALYSIS ══════════════ -->
+<section class="section">
+  <div class="section-label">03 · Platform Analysis</div>
+  <div class="section-title">Meta — Campaign Analysis</div>
+
+  <div class="kpi-grid" style="margin-bottom:32px">
+    <div class="kpi-card">
+      <span class="kpi-icon">💸</span>
+      <div class="kpi-val" style="color:var(--accent3)">₹1,04,951</div>
+      <div class="kpi-label">Ad Spend</div>
+      <div class="kpi-note">Meta · February 2026</div>
+    </div>
+    <div class="kpi-card blue">
+      <span class="kpi-icon">📦</span>
+      <div class="kpi-val">76</div>
+      <div class="kpi-label">Orders</div>
+      <div class="kpi-note">Meta · February 2026</div>
+    </div>
+    <div class="kpi-card accent">
+      <span class="kpi-icon">📈</span>
+      <div class="kpi-val">₹1,27,752</div>
+      <div class="kpi-label">Gross Revenue</div>
+      <div class="kpi-note">Meta · February 2026</div>
+    </div>
+    <div class="kpi-card gold">
+      <span class="kpi-icon">⚡</span>
+      <div class="kpi-val">1.22x</div>
+      <div class="kpi-label">ROAS</div>
+      <div class="kpi-note">Meta · February 2026</div>
+    </div>
+  </div>
+
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="ic-icon">🗓️</div>
+      <div class="ic-title">Campaign Launch</div>
+      <div class="ic-body">Campaigns were initiated on 3rd February, as the ad budget was added on that day.</div>
+    </div>
+    <div class="insight-card">
+      <div class="ic-icon">📈</div>
+      <div class="ic-title">Scaling & Order Growth</div>
+      <div class="ic-body">Initially, the campaigns were run at a slower pace, but as we began scaling the performing campaigns, we started seeing a good increase in orders — especially after enabling COD on the website.</div>
+    </div>
+    <div class="insight-card">
+      <div class="ic-icon">🤝</div>
+      <div class="ic-title">COD & Customer Trust</div>
+      <div class="ic-body">Enabling Cash on Delivery (COD) helped build customer trust and significantly improved the conversion rate.</div>
+    </div>
+    <div class="insight-card">
+      <div class="ic-icon">🛡️</div>
+      <div class="ic-title">Trust as a Priority</div>
+      <div class="ic-body">At this stage, building customer trust is a key priority — it helps increase brand awareness among potential buyers while reducing the perceived risk of making a first purchase without prepaid payment from Excelgenics.</div>
+    </div>
+    <div class="insight-card">
+      <div class="ic-icon">⚠️</div>
+      <div class="ic-title">COD Challenges</div>
+      <div class="ic-body">While COD does bring certain challenges such as fake orders and higher RTO rates, we are planning to implement specific measures to reduce such orders.</div>
+    </div>
+    <div class="insight-card">
+      <div class="ic-icon">🌿</div>
+      <div class="ic-title">Product Demand Signals</div>
+      <div class="ic-body">Last month, we observed a strong spike in demand for Magneva products, along with growing traction for the CoQHealth SKU, which we plan to push further.</div>
+    </div>
+  </div>
+
+  <div class="highlight-box warning" style="margin-top:24px">
+    <div class="hb-title">⚡ Budget Cap Constraint</div>
+    <p style="font-size:14px;color:var(--muted);line-height:1.7">The budget cap of <strong style="color:var(--accent2)">₹1 lakh</strong> slightly limited our ability to scale the best-performing campaigns more aggressively.</p>
+  </div>
+</section>
+
+
+<!-- ══════════════ TOP CREATIVES ══════════════ -->
+<section class="section">
+  <div class="section-label">04 · Creative Performance</div>
+  <div class="section-title">Top Performing Creatives</div>
+  <p class="section-desc">The two best-performing ad creatives on Meta in February 2026, ranked by CTR and CVR.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:8px">
+
+    <!-- MAGNEVA CREATIVE -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden">
+      <!-- Image placeholder -->
+      <div style="width:100%;height:280px;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
+        <img src="/feb/image (75).png" alt="Creative Screenshot" style="max-width:100%;max-height:100%;object-fit:cover;border-radius:6px;">
+      </div>
+      <!-- Info -->
+      <div style="padding:20px 22px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+          <span style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700">Magneva</span>
+          <span style="background:rgba(63,214,168,0.1);color:var(--accent);border:1px solid rgba(63,214,168,0.2);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:2px">#1 Creative</span>
+        </div>
+        <div style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:0.05em;margin-bottom:18px">EXCELGENICS · Meta Ad</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding-top:14px;border-top:1px solid var(--border)">
+          <div style="background:var(--surface2);border-radius:6px;padding:12px 14px">
+            <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--accent)">1.47%</div>
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-top:3px">CTR</div>
+          </div>
+          <div style="background:var(--surface2);border-radius:6px;padding:12px 14px">
+            <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--accent)">2.29%</div>
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-top:3px">CVR</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COQHEALTH CREATIVE -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden">
+      <div style="width:100%;height:280px;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
+        <img src="/feb/image (76).png" alt="Creative Screenshot" style="max-width:100%;max-height:100%;object-fit:cover;border-radius:6px;">
+      </div>
+      <div style="padding:20px 22px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+          <span style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700">CoQHealth</span>
+          <span style="background:rgba(108,142,245,0.1);color:var(--accent3);border:1px solid rgba(108,142,245,0.2);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:2px">#2 Creative</span>
+        </div>
+        <div style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:0.05em;margin-bottom:18px">EXCELGENICS · Meta Ad</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding-top:14px;border-top:1px solid var(--border)">
+          <div style="background:var(--surface2);border-radius:6px;padding:12px 14px">
+            <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--accent3)">2.52%</div>
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-top:3px">CTR</div>
+          </div>
+          <div style="background:var(--surface2);border-radius:6px;padding:12px 14px">
+            <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--accent3)">1.16%</div>
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-top:3px">CVR</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════ GOOGLE ANALYSIS ══════════════ -->
+<section class="section">
+  <div class="section-label">04 · Platform Analysis</div>
+  <div class="section-title">Google — Campaign Analysis</div>
+
+  <div class="kpi-grid" style="margin-bottom:32px">
+    <div class="kpi-card">
+      <span class="kpi-icon">💸</span>
+      <div class="kpi-val" style="color:var(--accent3)">₹19,334</div>
+      <div class="kpi-label">Ad Spend</div>
+      <div class="kpi-note">Google · February 2026</div>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-icon">📦</span>
+      <div class="kpi-val" style="color:var(--muted)">0</div>
+      <div class="kpi-label">Orders</div>
+      <div class="kpi-note">Google · February 2026</div>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-icon">📈</span>
+      <div class="kpi-val" style="color:var(--muted)">₹0</div>
+      <div class="kpi-label">Revenue</div>
+      <div class="kpi-note">Google · February 2026</div>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-icon">⚡</span>
+      <div class="kpi-val" style="color:var(--muted)">0.00x</div>
+      <div class="kpi-label">ROAS</div>
+      <div class="kpi-note">Google · February 2026</div>
+    </div>
+  </div>
+
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="ic-icon">🔍</div>
+      <div class="ic-title">Search Campaign — OmegaCo Focus</div>
+      <div class="ic-body">On Google, we initially tested Search campaigns, primarily focusing on OmegaCo, as Omega supplements generally have strong market demand and are widely recognized products.</div>
+    </div>
+    <div class="insight-card">
+      <div class="ic-icon">🚫</div>
+      <div class="ic-title">No Conversions Despite Rankings</div>
+      <div class="ic-body">Despite achieving top search rankings, the campaigns did not generate conversions. While users were clicking to explore the product, the lack of established brand trust — common in the nutraceutical category — impacted purchase decisions.</div>
+    </div>
+    <div class="insight-card">
+      <div class="ic-icon">🧪</div>
+      <div class="ic-title">PMax Tested — No Traction</div>
+      <div class="ic-body">We also tested Performance Max (PMax) campaigns with the objective of driving orders. However, even after experimenting with multiple audience signals, the campaigns did not generate meaningful traction.</div>
+    </div>
+    <div class="insight-card">
+      <div class="ic-icon">🔀</div>
+      <div class="ic-title">Budget Shifted to Meta</div>
+      <div class="ic-body">Based on early performance, we decided to shift our focus and allocate the remaining budget to Meta, where we were already seeing better engagement and order potential — allowing us to scale what was working instead of testing across multiple platforms simultaneously.</div>
+    </div>
+  </div>
+
+  <div class="highlight-box" style="margin-top:24px">
+    <div class="hb-title">🔄 Google Reintroduction Plan</div>
+    <p style="font-size:14px;color:var(--muted);line-height:1.7">We can reintroduce Google campaigns once the brand gains stronger traction, and we begin seeing more stable ROAS and revenue growth from the current Meta campaigns.</p>
+  </div>
+
+  <div class="highlight-box warning" style="margin-top:16px">
+    <div class="hb-title">💡 Google Ads Credit Strategy</div>
+    <p style="font-size:14px;color:var(--muted);line-height:1.7">Additionally, the Google spend was primarily utilized to invest the initial <strong style="color:var(--accent2)">₹20k</strong> in order to unlock the additional <strong style="color:var(--accent2)">₹20k Google Ads credit</strong> by 8th February, while also maximizing platform learnings through sales objective campaigns within that budget.</p>
+  </div>
+</section>
+
+
+<!-- ══════════════ PRODUCT ANALYSIS ══════════════ -->
+<section class="section">
+  <div class="section-label">05 · Product Performance</div>
+  <div class="section-title">Product-Level Revenue Analysis</div>
+  <p class="section-desc">Total sales breakdown by product for February 2026. Magneva leads significantly, followed by CoQHealth and Mobilyn.</p>
+
+  <div style="margin-top:8px">
+
+    <!-- MAGNEVA -->
+    <div style="margin-bottom:20px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+        <div>
+          <span style="font-weight:600;font-size:15px">MAGNEVA</span>
+          <span style="font-size:12px;color:var(--muted);margin-left:8px;font-family:'DM Mono',monospace">EXCELGENICS · Skin health</span>
+        </div>
+        <span style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--accent)">₹46,600</span>
+      </div>
+      <div style="background:var(--surface2);border-radius:3px;height:10px;overflow:hidden">
+        <div style="height:100%;width:100%;background:linear-gradient(90deg,#3fd6a8,#6c8ef5);border-radius:3px;transition:width 0.6s ease"></div>
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px;font-family:'DM Mono',monospace">36.6% of total revenue</div>
+    </div>
+
+    <!-- COQHEALTH -->
+    <div style="margin-bottom:20px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+        <div>
+          <span style="font-weight:600;font-size:15px">COQHEALTH</span>
+          <span style="font-size:12px;color:var(--muted);margin-left:8px;font-family:'DM Mono',monospace">EXCELGENICS · Skin health</span>
+        </div>
+        <span style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--accent)">₹29,700</span>
+      </div>
+      <div style="background:var(--surface2);border-radius:3px;height:10px;overflow:hidden">
+        <div style="height:100%;width:63.7%;background:linear-gradient(90deg,#3fd6a8,#6c8ef5);border-radius:3px"></div>
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px;font-family:'DM Mono',monospace">23.2% of total revenue</div>
+    </div>
+
+    <!-- MOBILYN -->
+    <div style="margin-bottom:20px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+        <div>
+          <span style="font-weight:600;font-size:15px">MOBILYN</span>
+          <span style="font-size:12px;color:var(--muted);margin-left:8px;font-family:'DM Mono',monospace">EXCELGENICS · Skin health</span>
+        </div>
+        <span style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--accent)">₹28,700</span>
+      </div>
+      <div style="background:var(--surface2);border-radius:3px;height:10px;overflow:hidden">
+        <div style="height:100%;width:61.6%;background:linear-gradient(90deg,#3fd6a8,#6c8ef5);border-radius:3px"></div>
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px;font-family:'DM Mono',monospace">22.5% of total revenue</div>
+    </div>
+
+    <!-- PUREBERB -->
+    <div style="margin-bottom:20px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+        <div>
+          <span style="font-weight:600;font-size:15px">PUREBERB</span>
+          <span style="font-size:12px;color:var(--muted);margin-left:8px;font-family:'DM Mono',monospace">EXCELGENICS · Skin health</span>
+        </div>
+        <span style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--accent2)">₹10,800</span>
+      </div>
+      <div style="background:var(--surface2);border-radius:3px;height:10px;overflow:hidden">
+        <div style="height:100%;width:23.2%;background:linear-gradient(90deg,#f0b429,#f87171);border-radius:3px"></div>
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px;font-family:'DM Mono',monospace">8.5% of total revenue</div>
+    </div>
+
+    <!-- RADIA -->
+    <div style="margin-bottom:20px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+        <div>
+          <span style="font-weight:600;font-size:15px">RADIA</span>
+          <span style="font-size:12px;color:var(--muted);margin-left:8px;font-family:'DM Mono',monospace">EXCELGENICS · Skin health</span>
+        </div>
+        <span style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--accent2)">₹8,000</span>
+      </div>
+      <div style="background:var(--surface2);border-radius:3px;height:10px;overflow:hidden">
+        <div style="height:100%;width:17.2%;background:linear-gradient(90deg,#f0b429,#f87171);border-radius:3px"></div>
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px;font-family:'DM Mono',monospace">6.3% of total revenue</div>
+    </div>
+
+    <!-- OMEGACO -->
+    <div style="margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+        <div>
+          <span style="font-weight:600;font-size:15px">OMEGACO</span>
+          <span style="font-size:12px;color:var(--muted);margin-left:8px;font-family:'DM Mono',monospace">EXCELGENICS · Skin health</span>
+        </div>
+        <span style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--muted)">₹3,700</span>
+      </div>
+      <div style="background:var(--surface2);border-radius:3px;height:10px;overflow:hidden">
+        <div style="height:100%;width:7.9%;background:linear-gradient(90deg,#7a8ba0,#4a5a70);border-radius:3px"></div>
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px;font-family:'DM Mono',monospace">2.9% of total revenue</div>
+    </div>
+
+  </div>
+
+  <!-- Summary row -->
+  <div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+    <div style="font-size:13px;color:var(--muted)">Total across 6 products</div>
+    <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--accent)">₹1,27,500 <span style="font-size:14px;color:var(--muted);font-family:'DM Sans',sans-serif">gross revenue</span></div>
+  </div>
+</section>
+
+
+<!-- ══════════════ TOP PERFORMING PRODUCTS ══════════════ -->
+<section class="section">
+  <div class="section-label">06 · Top Performers</div>
+  <div class="section-title">Top Performing Products</div>
+  <p class="section-desc">The three standout products driving the majority of February's revenue.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:8px">
+
+    <!-- MAGNEVA -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden">
+      <!-- Image placeholder -->
+      <div style="width:100%;height:280px;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
+        <img src="/feb/image (76).png" alt="Creative Screenshot" style="max-width:100%;max-height:100%;object-fit:cover;border-radius:6px;">
+      </div>
+      <!-- Info -->
+      <div style="padding:20px 22px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+          <span style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700">Magneva</span>
+          <span style="background:rgba(63,214,168,0.1);color:var(--accent);border:1px solid rgba(63,214,168,0.2);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:2px">#1</span>
+        </div>
+        <div style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:0.05em;margin-bottom:14px">EXCELGENICS · Skin Health</div>
+        <div style="padding-top:14px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:baseline">
+          <span style="font-size:12px;color:var(--muted)">February Revenue</span>
+          <span style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--accent)">₹46,600</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- COQHEALTH -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden">
+      <div style="width:100%;height:280px;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
+        <img src="/feb/image (77).png" alt="Creative Screenshot" style="max-width:100%;max-height:100%;object-fit:cover;border-radius:6px;">
+      </div>
+      <div style="padding:20px 22px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+          <span style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700">CoQHealth</span>
+          <span style="background:rgba(108,142,245,0.1);color:var(--accent3);border:1px solid rgba(108,142,245,0.2);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:2px">#2</span>
+        </div>
+        <div style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:0.05em;margin-bottom:14px">EXCELGENICS · Skin Health</div>
+        <div style="padding-top:14px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:baseline">
+          <span style="font-size:12px;color:var(--muted)">February Revenue</span>
+          <span style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--accent3)">₹29,700</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOBILYN -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden">
+      <div style="width:100%;height:280px;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
+        <img src="/feb/image (77).png" alt="Creative Screenshot" style="max-width:100%;max-height:100%;object-fit:cover;border-radius:6px;">
+      </div>
+      <div style="padding:20px 22px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+          <span style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700">Mobilyn</span>
+          <span style="background:rgba(240,180,41,0.1);color:var(--accent2);border:1px solid rgba(240,180,41,0.2);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:2px">#3</span>
+        </div>
+        <div style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:0.05em;margin-bottom:14px">EXCELGENICS · Skin Health</div>
+        <div style="padding-top:14px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:baseline">
+          <span style="font-size:12px;color:var(--muted)">February Revenue</span>
+          <span style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--accent2)">₹28,700</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════ GEO ANALYSIS ══════════════ -->
+<section class="section">
+  <div class="section-label">06 · Geographic Analysis</div>
+  <div class="section-title">Sales by State — Top 6</div>
+  <p class="section-desc">Revenue distribution across India for February 2026. Maharashtra leads, with strong presence across western and southern states.</p>
+
+  <div style="display:flex;align-items:center;justify-content:center;gap:60px;flex-wrap:wrap;margin-top:16px">
+
+    <!-- DONUT CHART -->
+    <div style="position:relative;width:260px;height:260px;flex-shrink:0">
+      <svg viewBox="0 0 260 260" width="260" height="260" style="transform:rotate(-90deg)">
+        <!-- Maharashtra 17.4K = 13.6% -->
+        <circle cx="130" cy="130" r="100" fill="none" stroke="#3fd6a8" stroke-width="38"
+          stroke-dasharray="85.5 542.9" stroke-dashoffset="0"/>
+        <!-- Gujarat 8.4K = 6.6% -->
+        <circle cx="130" cy="130" r="100" fill="none" stroke="#6c8ef5" stroke-width="38"
+          stroke-dasharray="41.3 542.9" stroke-dashoffset="-85.5"/>
+        <!-- Rajasthan 8.3K = 6.5% -->
+        <circle cx="130" cy="130" r="100" fill="none" stroke="#f0b429" stroke-width="38"
+          stroke-dasharray="40.8 542.9" stroke-dashoffset="-126.8"/>
+        <!-- Karnataka 6.5K = 5.1% -->
+        <circle cx="130" cy="130" r="100" fill="none" stroke="#a78bfa" stroke-width="38"
+          stroke-dasharray="32.0 542.9" stroke-dashoffset="-167.6"/>
+        <!-- Telangana 6.3K = 4.9% -->
+        <circle cx="130" cy="130" r="100" fill="none" stroke="#34d399" stroke-width="38"
+          stroke-dasharray="30.9 542.9" stroke-dashoffset="-199.6"/>
+        <!-- Tamil Nadu 5.7K = 4.5% -->
+        <circle cx="130" cy="130" r="100" fill="none" stroke="#f472b6" stroke-width="38"
+          stroke-dasharray="28.0 542.9" stroke-dashoffset="-230.5"/>
+        <!-- Others = 59.2% -->
+        <circle cx="130" cy="130" r="100" fill="none" stroke="#1e2d40" stroke-width="38"
+          stroke-dasharray="286.9 542.9" stroke-dashoffset="-258.5"/>
+      </svg>
+      <!-- Centre label -->
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+        <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--text)">₹1.27L</div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-top:2px">Total Sales</div>
+      </div>
+    </div>
+
+    <!-- LEGEND + BARS -->
+    <div style="flex:1;min-width:260px;display:flex;flex-direction:column;gap:14px">
+
+      <!-- Maharashtra -->
+      <div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="width:10px;height:10px;border-radius:2px;background:#3fd6a8;display:inline-block;flex-shrink:0"></span>
+            <span style="font-size:14px;font-weight:500">Maharashtra</span>
+          </div>
+          <span style="font-family:'DM Mono',monospace;font-size:13px;color:var(--accent)">₹17,400</span>
+        </div>
+        <div style="background:var(--surface2);border-radius:3px;height:7px;overflow:hidden">
+          <div style="height:100%;width:100%;background:#3fd6a8;border-radius:3px"></div>
+        </div>
+      </div>
+
+      <!-- Gujarat -->
+      <div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="width:10px;height:10px;border-radius:2px;background:#6c8ef5;display:inline-block;flex-shrink:0"></span>
+            <span style="font-size:14px;font-weight:500">Gujarat</span>
+          </div>
+          <span style="font-family:'DM Mono',monospace;font-size:13px;color:var(--accent3)">₹8,400</span>
+        </div>
+        <div style="background:var(--surface2);border-radius:3px;height:7px;overflow:hidden">
+          <div style="height:100%;width:48.3%;background:#6c8ef5;border-radius:3px"></div>
+        </div>
+      </div>
+
+      <!-- Rajasthan -->
+      <div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="width:10px;height:10px;border-radius:2px;background:#f0b429;display:inline-block;flex-shrink:0"></span>
+            <span style="font-size:14px;font-weight:500">Rajasthan</span>
+          </div>
+          <span style="font-family:'DM Mono',monospace;font-size:13px;color:var(--accent2)">₹8,300</span>
+        </div>
+        <div style="background:var(--surface2);border-radius:3px;height:7px;overflow:hidden">
+          <div style="height:100%;width:47.7%;background:#f0b429;border-radius:3px"></div>
+        </div>
+      </div>
+
+      <!-- Karnataka -->
+      <div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="width:10px;height:10px;border-radius:2px;background:#a78bfa;display:inline-block;flex-shrink:0"></span>
+            <span style="font-size:14px;font-weight:500">Karnataka</span>
+          </div>
+          <span style="font-family:'DM Mono',monospace;font-size:13px;color:#a78bfa">₹6,500</span>
+        </div>
+        <div style="background:var(--surface2);border-radius:3px;height:7px;overflow:hidden">
+          <div style="height:100%;width:37.4%;background:#a78bfa;border-radius:3px"></div>
+        </div>
+      </div>
+
+      <!-- Telangana -->
+      <div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="width:10px;height:10px;border-radius:2px;background:#34d399;display:inline-block;flex-shrink:0"></span>
+            <span style="font-size:14px;font-weight:500">Telangana</span>
+          </div>
+          <span style="font-family:'DM Mono',monospace;font-size:13px;color:#34d399">₹6,300</span>
+        </div>
+        <div style="background:var(--surface2);border-radius:3px;height:7px;overflow:hidden">
+          <div style="height:100%;width:36.2%;background:#34d399;border-radius:3px"></div>
+        </div>
+      </div>
+
+      <!-- Tamil Nadu -->
+      <div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="width:10px;height:10px;border-radius:2px;background:#f472b6;display:inline-block;flex-shrink:0"></span>
+            <span style="font-size:14px;font-weight:500">Tamil Nadu</span>
+          </div>
+          <span style="font-family:'DM Mono',monospace;font-size:13px;color:#f472b6">₹5,700</span>
+        </div>
+        <div style="background:var(--surface2);border-radius:3px;height:7px;overflow:hidden">
+          <div style="height:100%;width:32.8%;background:#f472b6;border-radius:3px"></div>
+        </div>
+      </div>
+
+      <!-- Others -->
+      <div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="width:10px;height:10px;border-radius:2px;background:#1e2d40;border:1px solid var(--border);display:inline-block;flex-shrink:0"></span>
+            <span style="font-size:14px;font-weight:500;color:var(--muted)">All Other States</span>
+          </div>
+          <span style="font-family:'DM Mono',monospace;font-size:13px;color:var(--muted)">₹75,152</span>
+        </div>
+        <div style="background:var(--surface2);border-radius:3px;height:7px;overflow:hidden">
+          <div style="height:100%;width:58.9%;background:var(--surface2);border:1px solid var(--border);border-radius:3px"></div>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:3px;font-family:'DM Mono',monospace">+14 more states</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ PLACEHOLDER SECTIONS ══════════════ -->
+
+<!-- ══════════════ MARCH PROJECTIONS ══════════════ -->
+<section class="section">
+  <div class="section-label">09 · Forward Look</div>
+  <div class="section-title">March 2026 — Projected Numbers & Strategy</div>
+  <p class="section-desc">Targets and strategic priorities for March, based on February learnings and aggressive creative testing.</p>
+
+  <!-- KPI Cards -->
+  <div class="kpi-grid" style="margin-bottom:32px">
+    <div class="kpi-card">
+      <span class="kpi-icon">💸</span>
+      <div class="kpi-val" style="color:var(--accent3)">₹1,00,000</div>
+      <div class="kpi-label">Projected Spend</div>
+      <div class="kpi-note">March 2026</div>
+    </div>
+    <div class="kpi-card blue">
+      <span class="kpi-icon">📦</span>
+      <div class="kpi-val">76+</div>
+      <div class="kpi-label">Projected Orders</div>
+      <div class="kpi-note">March 2026</div>
+    </div>
+    <div class="kpi-card accent">
+      <span class="kpi-icon">📈</span>
+      <div class="kpi-val">₹98,307</div>
+      <div class="kpi-label">Projected Revenue</div>
+      <div class="kpi-note">March 2026</div>
+    </div>
+    <div class="kpi-card gold">
+      <span class="kpi-icon">⚡</span>
+      <div class="kpi-val">0.98x</div>
+      <div class="kpi-label">Projected ROAS</div>
+      <div class="kpi-note">Target: 1x+</div>
+    </div>
+  </div>
+
+  <!-- Projection context -->
+  <div class="highlight-box warning" style="margin-bottom:24px">
+    <div class="hb-title">📊 Projection Basis</div>
+    <p style="font-size:14px;color:var(--muted);line-height:1.8">While our primary priority will be to achieve a minimum revenue target of <strong style="color:var(--accent2)">₹1 lakh</strong> for the month, this projection is based on implementing the suggested strategies along with aggressive creative testing across different marketing angles, particularly through video creatives. This approach will help us aim for a <strong style="color:var(--accent2)">1x+ improvement in ROAS</strong>.</p>
+  </div>
+
+  <!-- Notes for March -->
+  <div style="margin-top:8px">
+    <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:16px">Notes for March</div>
+    <ul class="steps-list">
+      <li>
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <strong>Revenue Target — ₹1 Lakh at 1x ROAS</strong>
+          <span>Our target for March is to achieve ₹1 lakh in revenue with a 1x ROAS.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <strong>Focus on Scaling Top Performers</strong>
+          <span>The primary strategy will be to focus on scaling products and campaigns that are already performing well and generating higher traction, rather than distributing the budget across all products. Expanding to other products can be considered with a separate dedicated testing budget.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <strong>Budget Discipline — Stay Within ₹1 Lakh</strong>
+          <span>We will ensure that the overall ad spend remains within the ₹1 lakh budget for the month.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">04</div>
+        <div class="step-body">
+          <strong>Timely Fund Addition — Critical for Continuity</strong>
+          <span>Excelgenics should ensure timely addition of funds to avoid any interruptions, as disruptions in budget flow can affect campaign learning and performance stability.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">05</div>
+        <div class="step-body">
+          <strong>Magneva & CoQHealth — Dual Focus</strong>
+          <span>While Magneva continues to generate the highest number of orders, we are also focusing on pushing CoQHealth, as it is showing promising traction and potential to scale with a stronger ROAS.</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer class="footer">
+  <div>
+    <div class="footer-brand">EXCELGENICS <span>·</span> Nutraceuticals</div>
+    <div class="footer-meta" style="margin-top:6px">February 2026 Performance Marketing Report</div>
+  </div>
+  <div style="text-align:right">
+    <div class="footer-meta">Prepared by: Performance Marketing Team</div>
+    <div class="footer-meta" style="margin-top:4px">Next Review: March 2026 · Confidential</div>
+  </div>
+</footer>
+
+</body>
+</html>
+
